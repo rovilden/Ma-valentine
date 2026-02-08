@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Une question très importante 💘</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 1.1em;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    .yes {
+      background: #fff;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    .no {
+      background: #ff4d6d;
+      color: white;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .hearts {
+      position: fixed;
+      top: -10px;
+      animation: fall linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="content">
+    <h1>J’ai une question très importante… 💌</h1>
+    <p>Promis, ça ne fait pas mal 😏</p>
+    <button class="yes" onclick="showQuestion()">Continuer</button>
+  </div>
+
+  <script>
+    function showQuestion() {
+      document.getElementById("content").innerHTML = `
+        <h1>Veux-tu être ma Valentine ? 💖</h1>
+        <p>Réfléchis bien… mais pas trop longtemps 😌</p>
+        <button class="yes" onclick="yesAnswer()">OUI 💕</button>
+        <button class="no" id="noBtn">NON 😶</button>
+      `;
+
+      const noBtn = document.getElementById("noBtn");
+      noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
+
+    function yesAnswer() {
+      document.getElementById("content").innerHTML = `
+        <h1>💘 OUIIIII 💘</h1>
+        <p>Tu viens de rendre quelqu’un extrêmement heureux 🥹</p>
+        <p>Je t’aime ❤️</p>
+      `;
+      startHearts();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "hearts";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
