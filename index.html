@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Une question très importante 💘</title>
+  <meta charset="UTF-8">
+  <title>Une question pour toi 💘</title>
   <style>
     body {
       margin: 0;
@@ -19,21 +19,21 @@
 
     .container {
       background: rgba(255, 255, 255, 0.15);
-      padding: 40px;
+      padding: 35px;
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      max-width: 400px;
+      max-width: 420px;
       width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     }
 
     h1 {
       font-size: 2em;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     p {
       font-size: 1.1em;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     button {
@@ -43,11 +43,10 @@
       border-radius: 30px;
       cursor: pointer;
       margin: 10px;
-      transition: transform 0.2s;
     }
 
     .yes {
-      background: #fff;
+      background: white;
       color: #ff4d6d;
       font-weight: bold;
     }
@@ -55,73 +54,82 @@
     .no {
       background: #ff4d6d;
       color: white;
-      position: relative;
+      position: absolute;
     }
 
-    button:hover {
-      transform: scale(1.1);
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 10px;
     }
 
-    .hearts {
+    .heart {
       position: fixed;
       top: -10px;
-      animation: fall linear infinite;
       font-size: 20px;
+      animation: fall linear infinite;
     }
 
     @keyframes fall {
-      to {
-        transform: translateY(110vh);
-      }
+      to { transform: translateY(110vh); }
     }
   </style>
 </head>
 <body>
 
-  <div class="container" id="content">
-    <h1>J’ai une question très importante… 💌</h1>
-    <p>Promis, ça ne fait pas mal 😏</p>
-    <button class="yes" onclick="showQuestion()">Continuer</button>
-  </div>
+<audio id="music" src="musique.mp3" loop></audio>
 
-  <script>
-    function showQuestion() {
-      document.getElementById("content").innerHTML = `
-        <h1>Veux-tu être ma Valentine ? 💖</h1>
-        <p>Réfléchis bien… mais pas trop longtemps 😌</p>
-        <button class="yes" onclick="yesAnswer()">OUI 💕</button>
-        <button class="no" id="noBtn">NON 😶</button>
-      `;
+<div class="container" id="content">
+  <h1>Hey ❤️</h1>
+  <p>J’ai quelque chose de très important à te demander…</p>
+  <button class="yes" onclick="start()">Continuer</button>
+</div>
 
-      const noBtn = document.getElementById("noBtn");
-      noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 200 - 100;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    }
+<script>
+  const prenom = "SON_PRENOM"; // ⬅️ change ici
 
-    function yesAnswer() {
-      document.getElementById("content").innerHTML = `
-        <h1>💘 OUIIIII 💘</h1>
-        <p>Tu viens de rendre quelqu’un extrêmement heureux 🥹</p>
-        <p>Je t’aime ❤️</p>
-      `;
-      startHearts();
-    }
+  function start() {
+    document.getElementById("music").play();
+    document.getElementById("content").innerHTML = `
+      <h1>${prenom}, veux-tu être ma Valentine ? 💘</h1>
+      <p>Attention… le NON est une illusion 😏</p>
+      <button class="yes" onclick="yes()">OUI 💕</button>
+      <button class="no" id="no">NON 😶</button>
+    `;
 
-    function startHearts() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "hearts";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-      }, 300);
-    }
-  </script>
+    const no = document.getElementById("no");
+    setInterval(() => {
+      no.style.left = Math.random() * 80 + "vw";
+      no.style.top = Math.random() * 80 + "vh";
+    }, 300);
+  }
+
+  function yes() {
+    document.getElementById("content").innerHTML = `
+      <h1>💖 OUIIIII 💖</h1>
+      <p>${prenom}, tu viens de rendre quelqu’un très amoureux 🥹</p>
+      <div class="gallery">
+        <img src="photo1.jpg">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
+      </div>
+      <p>Je t’aime ❤️</p>
+    `;
+    hearts();
+  }
+
+  function hearts() {
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerHTML = "❤️";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 5000);
+    }, 250);
+  }
+</script>
 
 </body>
 </html>
